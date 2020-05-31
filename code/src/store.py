@@ -15,6 +15,9 @@ class Store():
     _groups = []
     _current_user = None
 
+    def __dir__(self):
+        return ['_users', '_groups']
+
     # Get all users from the database
     def get_users(self):
         return self._users

@@ -51,17 +51,18 @@ class Facebook(cmd.Cmd):
     def do_login(self, arg):
         'Log in with registered username and password.'
         username = input('Username: ')
-        input_password = getpass.getpass('Password: ')
-
         user = self._store.get_user(username)
-        if (username):
+        if (user is not None):
+            input_password = getpass.getpass('Password: ')
+
+            # TODO: encapsulate this feature in User class
             salt = user.get_salt()
             input_pw_hash = hashlib.pbkdf2_hmac(
                 'sha256',
                 input_password.encode('utf-8'),
                 salt,
                 100000
-            )
+            ) + salt
 
             if (hmac.compare_digest(input_pw_hash, user.get_pw_hash())):
                 self._store.set_current_user(user)
@@ -69,7 +70,7 @@ class Facebook(cmd.Cmd):
             else:
                 print('Wrong password.')
         else:
-            print('Wrong password.')
+            print('Wrong username.')
 
     def do_logout(self, arg):
         'Log out of current session.'
@@ -174,4 +175,4 @@ class Facebook(cmd.Cmd):
 
     def do_post(self, arg):
         'Create a text post. Usage: post <content>'
-        self._store.get_current_user().create_post(content=arg)
+        self._store.get_current_user().create_post(arg)

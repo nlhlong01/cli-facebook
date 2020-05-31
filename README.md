@@ -1,5 +1,5 @@
 # Advanced Software Technology: Assignment \#2
-### Author: <YOUR_NAME(S)>
+### Author: Long Nguyen
 
 ### Deadline: 01.06.2020 - 08:00 CEST
 
@@ -15,7 +15,7 @@ You can use this to-do list to help you keep track of your progress when you are
 
 ### Submission TO-DO:
 Before your final commit, please make sure you go through this list.
-- [ ] Write your name(s) at the top of this document.
+- [X] Write your name(s) at the top of this document.
 - [ ] Perform a last test of your program.
 - [ ] Make sure all the models are in `models.pdf`
 - [ ] Make sure all the code files are in ./code

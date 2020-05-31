@@ -13,17 +13,10 @@
 
 
 from facebook import Facebook
-from mock_data import store as store
+from mock_data import store
 
 
 def main():
-    """Although writing unit tests is not a requirement, testing is extremely
-    important to an app of this extent so I hard-coded the test data in the main()
-    function. They will be moved to a separate test file when this app is extended.
-
-    """
-
-    # Let's get it started.
     Facebook(store).cmdloop()
 
 

@@ -9,20 +9,21 @@ class Post:
 
     """
 
-    def __init__(self, owner, content='', group=None):
-        # TODO: Since the post is always created from the User object,
-        # it may be not necessary to specify the post owner.
+    def __init__(self, owner, content, group=None):
         self._owner = owner
         self._content = content
         self._group = group
         self._date_created = datetime.now()
         print('Post created')
 
-    def get_owner(self):
-        return self._owner
-
     def get_content(self):
         return self._content
+
+    def get_group(self):
+        return self._group
+    
+    def set_content(self, content):
+        self._content = content
 
     def get_date_created(self):
         return self._date_created

@@ -6,19 +6,22 @@ class User:
     Requires a full name, a username, and a password
 
     """
-    # TODO: At the moment, log-in works without password.
 
-    def __init__(self, fullname, username, pw_hash_salt):
+    def __init__(self, fullname, username, pw_hash):
         self._fullname = fullname
         self._username = username
-        self._pw_hash = pw_hash_salt[:32]
-        self._salt = pw_hash_salt[32:]
+        # TODO: use a different data structure to store password
+        self._pw_hash = pw_hash
+        self._salt = pw_hash[32:]
         self._friends = []
         # Joined group
         self._groups = []
         # Post created by this user
         self._posts = []
         print(f'User created {self._fullname} ({self._username})')
+
+    def __dir__(self):
+        return ['_fullname', '_username']
 
     def get_fullname(self):
         return self._fullname
@@ -30,7 +33,7 @@ class User:
         return self._pw_hash
 
     def get_salt(self):
-        return self._salt
+        return self._salt 
 
     def add_friend(self, user):
         # Checks if the friend has been added.
@@ -54,8 +57,8 @@ class User:
     def get_groups(self):
         return self._groups
 
-    def create_post(self, group=None, content=''):
-        new_post = Post(self, group=group, content=content)
+    def create_post(self, content, group=None):
+        new_post = Post(self, content, group=group)
         if group is None:
             self._posts.append(new_post)
         else:
