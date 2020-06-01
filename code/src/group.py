@@ -1,7 +1,6 @@
 class Group():
     """A group where people can become members and post discussions.
     The posts are shared on newsfeed of every member.
-
     """
 
     def __init__(self, name):
@@ -9,6 +8,9 @@ class Group():
         self._members = []
         self._posts = []
         print(f'Group {self._name} created')
+
+    def __dir__(self):
+        return ['_name', '_members', '_posts']
 
     def get_members(self):
         return self._members

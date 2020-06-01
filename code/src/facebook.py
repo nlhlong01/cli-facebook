@@ -4,6 +4,7 @@ import hashlib
 import os
 import re
 import hmac
+from post import Post
 
 
 class Facebook(cmd.Cmd):
@@ -15,7 +16,6 @@ class Facebook(cmd.Cmd):
     When logged out/Before logged in: register, login
 
     When logged in: newsfeed, friends, add, groups, join, post, search, logout
-
     """
     intro = '''\nWelcome to Facebook. Type help or ? to list commands.
     Type help <command> to know how to use the command.'''
@@ -51,17 +51,18 @@ class Facebook(cmd.Cmd):
     def do_login(self, arg):
         'Log in with registered username and password.'
         username = input('Username: ')
-        input_password = getpass.getpass('Password: ')
-
         user = self._store.get_user(username)
-        if (username):
+        if (user is not None):
+            input_password = getpass.getpass('Password: ')
+
+            # TODO: encapsulate this feature in User class
             salt = user.get_salt()
             input_pw_hash = hashlib.pbkdf2_hmac(
                 'sha256',
                 input_password.encode('utf-8'),
                 salt,
                 100000
-            )
+            ) + salt
 
             if (hmac.compare_digest(input_pw_hash, user.get_pw_hash())):
                 self._store.set_current_user(user)
@@ -69,7 +70,7 @@ class Facebook(cmd.Cmd):
             else:
                 print('Wrong password.')
         else:
-            print('Wrong password.')
+            print('Wrong username.')
 
     def do_logout(self, arg):
         'Log out of current session.'
@@ -96,11 +97,7 @@ class Facebook(cmd.Cmd):
         total_posts.extend(friends_posts)
         total_posts.extend(groups_posts)
 
-        total_posts = sorted(
-            total_posts,
-            key=lambda post:
-            post.get_date_created()
-        )
+        total_posts = sorted(total_posts, key=lambda post: post.get_date())
 
         # Displays posts
         print('')
@@ -170,8 +167,9 @@ class Facebook(cmd.Cmd):
     def do_join(self, arg):
         'Join a group. Usage: join <group_name>'
         group = self._store.get_group(arg)
-        self._store.get_current_user().join_group(group)
+        self._store.get_current_user().join(group)
 
     def do_post(self, arg):
         'Create a text post. Usage: post <content>'
-        self._store.get_current_user().create_post(content=arg)
+        post = Post(arg)
+        self._store.get_current_user().post(post)

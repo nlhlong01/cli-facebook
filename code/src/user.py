@@ -2,23 +2,25 @@ from post import Post
 
 
 class User:
-    """Represents a user in the social network
-    Requires a full name, a username, and a password
-
+    """Represent a user in the social network.
+    Require a full name, a username, and a password.
     """
-    # TODO: At the moment, log-in works without password.
 
-    def __init__(self, fullname, username, pw_hash_salt):
+    def __init__(self, fullname, username, pw_hash):
         self._fullname = fullname
         self._username = username
-        self._pw_hash = pw_hash_salt[:32]
-        self._salt = pw_hash_salt[32:]
+        # TODO: use a different data structure to store password
+        self._pw_hash = pw_hash
+        self._salt = pw_hash[32:]
         self._friends = []
         # Joined group
         self._groups = []
         # Post created by this user
         self._posts = []
         print(f'User created {self._fullname} ({self._username})')
+
+    def __dir__(self):
+        return ['_fullname', '_username', '_friends', '_groups', '_posts']
 
     def get_fullname(self):
         return self._fullname
@@ -44,7 +46,7 @@ class User:
     def get_friends(self):
         return self._friends
 
-    def join_group(self, group):
+    def join(self, group):
         try:
             self._groups.index(group)
         except ValueError:
@@ -54,13 +56,16 @@ class User:
     def get_groups(self):
         return self._groups
 
-    def create_post(self, group=None, content=''):
-        new_post = Post(self, group=group, content=content)
+    def post(self, post):
+        post.set_owner(self)
+        group = post.get_group()
+
         if group is None:
-            self._posts.append(new_post)
+            self._posts.append(post)
         else:
-            group.add_post(new_post)
-        return new_post
+            group.add_post(post)
+
+        return post
 
     def get_posts(self):
         return self._posts

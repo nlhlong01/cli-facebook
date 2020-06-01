@@ -9,11 +9,13 @@ class Store():
     1. Registered users.
     2. Created groups.
     3. Currently logged-in user.
-
     """
     _users = []
     _groups = []
     _current_user = None
+
+    def __dir__(self):
+        return ['_users', '_groups']
 
     # Get all users from the database
     def get_users(self):
