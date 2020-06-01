@@ -10,6 +10,9 @@ class Group():
         self._posts = []
         print(f'Group {self._name} created')
 
+    def __dir__(self):
+        return ['_name', '_members', '_posts']
+
     def get_members(self):
         return self._members
 

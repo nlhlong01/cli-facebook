@@ -9,12 +9,15 @@ class Post:
 
     """
 
-    def __init__(self, owner, content, group=None):
-        self._owner = owner
+    def __init__(self, content, group=None):
         self._content = content
         self._group = group
-        self._date_created = datetime.now()
+        self._date = datetime.now()
+        self._owner = None
         print('Post created')
+    
+    def __dir__(self):
+        return ['_content', '_date', '_group', '_owner']
 
     def get_content(self):
         return self._content
@@ -25,8 +28,14 @@ class Post:
     def set_content(self, content):
         self._content = content
 
-    def get_date_created(self):
-        return self._date_created
+    def get_date(self):
+        return self._date
+
+    def get_owner(self):
+        return self._owner
+    
+    def set_owner(self, owner):
+        self._owner = owner
 
     def display(self):
         fullname = self._owner.get_fullname()
@@ -37,6 +46,6 @@ class Post:
             print(f'From {fullname} ({username}) in {self._group.get_name()}:')
         else:
             print(f'From {fullname} ({username})')
-        print(self._date_created)
+        print(self._date)
         print(self._content)
         print('')

@@ -4,6 +4,7 @@ import hashlib
 import os
 import re
 import hmac
+from post import Post
 
 
 class Facebook(cmd.Cmd):
@@ -97,11 +98,7 @@ class Facebook(cmd.Cmd):
         total_posts.extend(friends_posts)
         total_posts.extend(groups_posts)
 
-        total_posts = sorted(
-            total_posts,
-            key=lambda post:
-            post.get_date_created()
-        )
+        total_posts = sorted(total_posts, key=lambda post: post.get_date())
 
         # Displays posts
         print('')
@@ -171,8 +168,9 @@ class Facebook(cmd.Cmd):
     def do_join(self, arg):
         'Join a group. Usage: join <group_name>'
         group = self._store.get_group(arg)
-        self._store.get_current_user().join_group(group)
+        self._store.get_current_user().join(group)
 
     def do_post(self, arg):
         'Create a text post. Usage: post <content>'
-        self._store.get_current_user().create_post(arg)
+        post = Post(arg)
+        self._store.get_current_user().post(post)

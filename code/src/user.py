@@ -21,7 +21,7 @@ class User:
         print(f'User created {self._fullname} ({self._username})')
 
     def __dir__(self):
-        return ['_fullname', '_username']
+        return ['_fullname', '_username', '_friends', '_groups', '_posts']
 
     def get_fullname(self):
         return self._fullname
@@ -47,7 +47,7 @@ class User:
     def get_friends(self):
         return self._friends
 
-    def join_group(self, group):
+    def join(self, group):
         try:
             self._groups.index(group)
         except ValueError:
@@ -57,13 +57,16 @@ class User:
     def get_groups(self):
         return self._groups
 
-    def create_post(self, content, group=None):
-        new_post = Post(self, content, group=group)
+    def post(self, post):
+        post.set_owner(self)
+        group = post.get_group()
+
         if group is None:
-            self._posts.append(new_post)
+            self._posts.append(post)
         else:
-            group.add_post(new_post)
-        return new_post
+            group.add_post(post)
+
+        return post
 
     def get_posts(self):
         return self._posts
