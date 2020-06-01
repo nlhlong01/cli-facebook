@@ -1,7 +1,6 @@
 class Group():
     """A group where people can become members and post discussions.
     The posts are shared on newsfeed of every member.
-
     """
 
     def __init__(self, name):

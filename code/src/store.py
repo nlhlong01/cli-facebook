@@ -9,7 +9,6 @@ class Store():
     1. Registered users.
     2. Created groups.
     3. Currently logged-in user.
-
     """
     _users = []
     _groups = []

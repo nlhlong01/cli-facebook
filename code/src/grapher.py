@@ -1,3 +1,7 @@
+"""Draw a class diagram of a snapshot of the program using Graphviz library.
+Objects are taken from the mock_data module. 
+"""
+
 import datetime
 import inspect
 import mock_data

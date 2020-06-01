@@ -6,7 +6,6 @@ class Post:
 
     If argument group=None, the post is created as the owner's own post.
     Otherwise, it is created in the specified group.
-
     """
 
     def __init__(self, content, group=None):
@@ -15,7 +14,7 @@ class Post:
         self._date = datetime.now()
         self._owner = None
         print('Post created')
-    
+
     def __dir__(self):
         return ['_content', '_date', '_group', '_owner']
 
@@ -24,7 +23,7 @@ class Post:
 
     def get_group(self):
         return self._group
-    
+
     def set_content(self, content):
         self._content = content
 
@@ -33,7 +32,7 @@ class Post:
 
     def get_owner(self):
         return self._owner
-    
+
     def set_owner(self, owner):
         self._owner = owner
 

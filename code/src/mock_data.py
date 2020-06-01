@@ -1,3 +1,6 @@
+"""Mock data for testing and documentation
+"""
+
 from post import Post
 from store import Store
 import hashlib
@@ -17,12 +20,12 @@ alan = store.create_user('Alan D.', 'alan', 'alanpw')
 tom = store.create_user('Thomas E.', 'tom', 'tompw')
 jack = store.create_user('Jack F.', 'jack', 'jackpw')
 # Add John and Jane as friends of Tom.
-# Tom should see their posts on his newsfeed.
+# Tom should see their posts on his newsfeed afterwards
 tom.add_friend(john)
 tom.add_friend(jane)
 
 # Test group.
-# People in the same group must see the posts of each other.
+# People in the same group must see the posts of each other after joining
 ast_class = store.create_group('AST Class')
 tom.join(ast_class)
 alan.join(ast_class)
@@ -42,10 +45,12 @@ tom.post(post_tom_ast)
 post_john_self = Post('I finally graduated.')
 john.post(post_john_self)
 
-post_rick_ast = Post("Hey Tom. Let's team up for the assignment!", group=ast_class)
+post_rick_ast = Post(
+    "Hey Tom. Let's team up for the assignment!", group=ast_class)
 rick.post(post_rick_ast)
 
-post_jane_ml = Post('Welcome all to the Machine Learning Class.', group=ml_class)
+post_jane_ml = Post(
+    'Welcome all to the Machine Learning Class.', group=ml_class)
 jane.post(post_jane_ml)
 
 post_jack_self = Post('Check out my new video on Youtube!')

@@ -2,9 +2,8 @@ from post import Post
 
 
 class User:
-    """Represents a user in the social network
-    Requires a full name, a username, and a password
-
+    """Represent a user in the social network.
+    Require a full name, a username, and a password.
     """
 
     def __init__(self, fullname, username, pw_hash):
@@ -33,7 +32,7 @@ class User:
         return self._pw_hash
 
     def get_salt(self):
-        return self._salt 
+        return self._salt
 
     def add_friend(self, user):
         # Checks if the friend has been added.

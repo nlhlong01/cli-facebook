@@ -16,7 +16,6 @@ class Facebook(cmd.Cmd):
     When logged out/Before logged in: register, login
 
     When logged in: newsfeed, friends, add, groups, join, post, search, logout
-
     """
     intro = '''\nWelcome to Facebook. Type help or ? to list commands.
     Type help <command> to know how to use the command.'''

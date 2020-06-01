@@ -8,7 +8,6 @@
 6. Show the list of friends and joined groups.
 7. Create a text post.
 8. See the posts from friends and joined groups on a central newsfeed.
-
 """
 
 
