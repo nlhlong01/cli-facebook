@@ -5,7 +5,7 @@ Objects are taken from the mock_data module.
 import datetime
 import inspect
 import mock_data
-from graphviz import Digraph, Graph
+from graphviz import Graph
 from group import Group
 from post import Post
 from user import User
@@ -37,6 +37,7 @@ def draw_nodes(graph, objects):
 
 
 def assign_label(head, tail):
+    """Assign a text label to an edge"""
     label = ''
 
     if set((head, tail)) == set(('User', 'Post')):
@@ -54,29 +55,29 @@ def assign_label(head, tail):
 def draw_edges(graph, objects):
     # Since edges cannot be created without nodes, we must go through the
     # objects again after all nodes are created.
-    for name, object in objects:
-        for attr in dir(object):
-            value = getattr(object, attr)
+    for name, obj in objects:
+        for attr in dir(obj):
+            value = getattr(obj, attr)
             if value is None:
                 break
-            # Generate 1 multiple edges from list
+            # Generate multiple edges from list of linked objects
             if isinstance(value, list):
                 for item in value:
                     graph.edge(
-                        str(id(object)),
+                        str(id(obj)),
                         str(id(item)),
                         label=assign_label(
-                            type(object).__name__,
+                            type(obj).__name__,
                             type(item).__name__
                         )
                     )
-            # Generate only 1 edge from single value
+            # Generate only 1 edge from single linked object
             elif not is_builtin(value):
                 graph.edge(
-                    str(id(object)),
+                    str(id(obj)),
                     str(id(value)),
                     label=assign_label(
-                        type(object).__name__,
+                        type(obj).__name__,
                         type(value).__name__
                     )
                 )
@@ -85,7 +86,6 @@ def draw_edges(graph, objects):
 graph = Graph(
     'Facebook Object Diagram',
     format='png',
-    graph_attr={},
     node_attr={'shape': 'record'},
     strict=True
 )
