@@ -12,7 +12,7 @@ def generate_pw_hash(password):
     """Generate a hash value from a clear text password.
     Use PKCS5_PBKDF2_HMAC_SHA256 hashing algorithm.
 
-    Return the hash value appended by the salt
+    Return the hash value appended with a random salt.
     """
     return hashlib.pbkdf2_hmac(
         'sha256',
