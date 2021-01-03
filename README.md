@@ -1,26 +1,29 @@
-# Advanced Software Technology: Assignment \#2
-### Author: Long Nguyen
+# Facebook CLI app
 
-### Deadline: 01.06.2020 - 08:00 CEST
+## Run
 
-In this assignment, we will use the `Graphviz` library to generate a graph that reflects the state of your system at a specific time. Your visualizer should be able to generate from the command line a “snapshot” of the objects in the system and how those objects connect to others.
+To start the app, run
 
-You can use this to-do list to help you keep track of your progress when you are ready to start coding.
+```bash
+python code/src/application.py
+```
 
-### TO-DO:
-- [X] Copy the previous assignment to this repo.
-- [X] Create the module `grapher`.
-- [X] Generate object diagram from the current objects in the system.
-- [X] Save the diagram as `diagram.png` on the root directory of this assignment.
+App usage instruction can be found when it is started.
 
-### Submission TO-DO:
-Before your final commit, please make sure you go through this list.
-- [X] Write your name(s) at the top of this document.
-- [X] Perform a last test of your program.
-- [X] Make sure all the models are in `models.pdf`
-- [X] Make sure all the code files are in ./code
-- [X] Make sure to save the diagram on the root directory of this assignment. 
-- [X] If necessary, add any additional detail to run your code.
-- [X] Update `requirements.txt`
+## Test
 
-Best of luck!
+Test data can be found in code/src/mock_data.py
+
+There are test scripts in the main() function. If you want to test it, I suggest you log in as Thomas (tom). He has 2 friends John and Jane and is a member of the group AST Class. From his timeline, you can see posts from his friends and one from Richard in AST Class who is not yet added to his friend list.
+
+If you join group ML Class and open the newsfeed afterwards, you can see a new post from Jane in this group appearing on the newsfeed.
+
+## Documentation
+
+### Draw object diagram
+
+```bash
+python code/src/grapher.py
+```
+
+Objects used to draw the diagram are also taken from code/src/mock_data.py
